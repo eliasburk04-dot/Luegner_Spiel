@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../services/game_service.dart';
 import 'lobby_screen.dart';
@@ -20,14 +19,10 @@ class JoinRoomScreen extends StatefulWidget {
 class _JoinRoomScreenState extends State<JoinRoomScreen> {
   final _codeController = TextEditingController();
   bool _isJoining = false;
-  bool _showQrScanner = false;
-  final GlobalKey _qrKey = GlobalKey(debugLabel: 'QR');
-  QRViewController? _qrController;
 
   @override
   void dispose() {
     _codeController.dispose();
-    _qrController?.dispose();
     super.dispose();
   }
 
@@ -71,18 +66,6 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
     );
   }
 
-  void _onQRViewCreated(QRViewController controller) {
-    _qrController = controller;
-    controller.scannedDataStream.listen((scanData) {
-      if (scanData.code != null && scanData.code!.isNotEmpty) {
-        // Pause camera and join room
-        controller.pauseCamera();
-        setState(() => _showQrScanner = false);
-        _joinRoom(scanData.code!);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +86,7 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
           ),
         ),
         child: SafeArea(
-          child: _showQrScanner ? _buildQrScanner() : _buildCodeEntry(),
+          child: _buildCodeEntry(),
         ),
       ),
     );
@@ -115,7 +98,6 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Player info
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -153,8 +135,6 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
             ),
           ),
           const SizedBox(height: 32),
-
-          // Room code input
           Card(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -198,8 +178,6 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
             ),
           ),
           const SizedBox(height: 24),
-
-          // Join button
           SizedBox(
             height: 56,
             child: ElevatedButton.icon(
@@ -224,99 +202,8 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 24),
-
-          // Divider
-          Row(
-            children: [
-              Expanded(child: Divider(color: Colors.white24)),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  'OR',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white54,
-                      ),
-                ),
-              ),
-              Expanded(child: Divider(color: Colors.white24)),
-            ],
-          ),
-          const SizedBox(height: 24),
-
-          // Scan QR button
-          SizedBox(
-            height: 56,
-            child: OutlinedButton.icon(
-              onPressed: () => setState(() => _showQrScanner = true),
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: Theme.of(context).colorScheme.primary),
-              ),
-              icon: const Icon(Icons.qr_code_scanner),
-              label: const Text(
-                'Scan QR Code',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-            ),
-          ),
         ],
       ),
-    );
-  }
-
-  Widget _buildQrScanner() {
-    return Column(
-      children: [
-        Expanded(
-          flex: 4,
-          child: Stack(
-            children: [
-              QRView(
-                key: _qrKey,
-                onQRViewCreated: _onQRViewCreated,
-                overlay: QrScannerOverlayShape(
-                  borderColor: Theme.of(context).colorScheme.primary,
-                  borderRadius: 16,
-                  borderLength: 30,
-                  borderWidth: 10,
-                  cutOutSize: 250,
-                ),
-              ),
-              Positioned(
-                top: 16,
-                left: 0,
-                right: 0,
-                child: Center(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black54,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Text(
-                      'Point camera at QR code',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Center(
-            child: TextButton.icon(
-              onPressed: () => setState(() => _showQrScanner = false),
-              icon: const Icon(Icons.keyboard),
-              label: const Text('Enter code manually'),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
