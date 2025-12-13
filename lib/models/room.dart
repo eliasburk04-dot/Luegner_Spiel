@@ -164,6 +164,11 @@ class Room {
     return counts;
   }
 
+  /// Get votes for a specific player
+  int getVotesFor(String playerId) {
+    return players.where((p) => p.votedFor == playerId).length;
+  }
+
   /// Get the player with most votes
   Player? get mostVotedPlayer {
     if (players.isEmpty) return null;
