@@ -29,50 +29,54 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: String.fromEnvironment('FIREBASE_API_KEY', defaultValue: 'YOUR_API_KEY'),
-    appId: String.fromEnvironment('FIREBASE_APP_ID', defaultValue: 'YOUR_APP_ID'),
-    messagingSenderId: String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID', defaultValue: 'YOUR_SENDER_ID'),
-    projectId: String.fromEnvironment('FIREBASE_PROJECT_ID', defaultValue: 'YOUR_PROJECT_ID'),
-    authDomain: String.fromEnvironment('FIREBASE_AUTH_DOMAIN', defaultValue: 'YOUR_PROJECT_ID.firebaseapp.com'),
-    databaseURL: String.fromEnvironment('FIREBASE_DATABASE_URL', defaultValue: 'https://YOUR_PROJECT_ID.firebaseio.com'),
-    storageBucket: String.fromEnvironment('FIREBASE_STORAGE_BUCKET', defaultValue: 'YOUR_PROJECT_ID.appspot.com'),
+    apiKey: 'AIzaSyBoIaz-Obn9p0zKlEhSLFGj642nFWLpyic',
+    appId: '1:729126001858:web:b20ad05ac9697d5b5e2f5b',
+    messagingSenderId: '729126001858',
+    projectId: 'luegnerspiel',
+    authDomain: 'luegnerspiel.firebaseapp.com',
+    databaseURL: 'https://luegnerspiel-default-rtdb.firebaseio.com',
+    storageBucket: 'luegnerspiel.firebasestorage.app',
+    measurementId: 'G-GE6GCVDG6X',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'YOUR_API_KEY',
-    appId: 'YOUR_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'YOUR_PROJECT_ID',
-    databaseURL: 'https://YOUR_PROJECT_ID.firebaseio.com',
-    storageBucket: 'YOUR_PROJECT_ID.appspot.com',
+    apiKey: 'AIzaSyD4R17zzFUQCN-NH-vIZXLKpBrw2neXrUg',
+    appId: '1:729126001858:android:61fcebb785d377fb5e2f5b',
+    messagingSenderId: '729126001858',
+    projectId: 'luegnerspiel',
+    databaseURL: 'https://luegnerspiel-default-rtdb.firebaseio.com',
+    storageBucket: 'luegnerspiel.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'YOUR_API_KEY',
-    appId: 'YOUR_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'YOUR_PROJECT_ID',
-    databaseURL: 'https://YOUR_PROJECT_ID.firebaseio.com',
-    storageBucket: 'YOUR_PROJECT_ID.appspot.com',
+    apiKey: 'AIzaSyDthipxXhJguRfGb-jYLWkxipHr4rdTlLg',
+    appId: '1:729126001858:ios:9cd66840fc31a77c5e2f5b',
+    messagingSenderId: '729126001858',
+    projectId: 'luegnerspiel',
+    databaseURL: 'https://luegnerspiel-default-rtdb.firebaseio.com',
+    storageBucket: 'luegnerspiel.firebasestorage.app',
     iosBundleId: 'com.example.luegnerSpiel',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'YOUR_API_KEY',
-    appId: 'YOUR_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'YOUR_PROJECT_ID',
-    databaseURL: 'https://YOUR_PROJECT_ID.firebaseio.com',
-    storageBucket: 'YOUR_PROJECT_ID.appspot.com',
+    apiKey: 'AIzaSyDthipxXhJguRfGb-jYLWkxipHr4rdTlLg',
+    appId: '1:729126001858:ios:9cd66840fc31a77c5e2f5b',
+    messagingSenderId: '729126001858',
+    projectId: 'luegnerspiel',
+    databaseURL: 'https://luegnerspiel-default-rtdb.firebaseio.com',
+    storageBucket: 'luegnerspiel.firebasestorage.app',
     iosBundleId: 'com.example.luegnerSpiel',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'YOUR_API_KEY',
-    appId: 'YOUR_APP_ID',
-    messagingSenderId: 'YOUR_SENDER_ID',
-    projectId: 'YOUR_PROJECT_ID',
-    databaseURL: 'https://YOUR_PROJECT_ID.firebaseio.com',
-    storageBucket: 'YOUR_PROJECT_ID.appspot.com',
+    apiKey: 'AIzaSyBoIaz-Obn9p0zKlEhSLFGj642nFWLpyic',
+    appId: '1:729126001858:web:547d0a78287aedcf5e2f5b',
+    messagingSenderId: '729126001858',
+    projectId: 'luegnerspiel',
+    authDomain: 'luegnerspiel.firebaseapp.com',
+    databaseURL: 'https://luegnerspiel-default-rtdb.firebaseio.com',
+    storageBucket: 'luegnerspiel.firebasestorage.app',
+    measurementId: 'G-VM21LWXQF1',
   );
+
 }

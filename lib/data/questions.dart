@@ -1,3 +1,5 @@
+import 'dart:math';
+
 // ============================================================================
 // LÜGNER GAME - QUESTIONS DATABASE
 // ============================================================================
@@ -36,6 +38,9 @@ enum QuestionCategory {
   social,     // Social situations and relationships
   work,       // Work/school related
   entertainment, // Hobbies and entertainment
+  dating,     // Dating and relationships
+  travel,     // Travel experiences
+  technology, // Tech and digital life
 }
 
 /// Model class for a question
@@ -82,27 +87,27 @@ final List<Question> questions = [
   // -------------------------------------------------------------------------
   const Question(
     id: 1,
-    question: "How much money would you spend on a first date? (in €)",
+    question: "Wie viel Geld würdest du für ein erstes Date ausgeben? (in €)",
     category: QuestionCategory.money,
   ),
   const Question(
     id: 2,
-    question: "How much do you spend on groceries per week? (in €)",
+    question: "Wie viel gibst du pro Woche für Lebensmittel aus? (in €)",
     category: QuestionCategory.money,
   ),
   const Question(
     id: 3,
-    question: "What's the maximum you'd pay for a concert ticket? (in €)",
+    question: "Was ist das Maximum, das du für ein Konzertticket zahlen würdest? (in €)",
     category: QuestionCategory.money,
   ),
   const Question(
     id: 4,
-    question: "How much money do you save per month? (in €)",
+    question: "Wie viel Geld sparst du pro Monat? (in €)",
     category: QuestionCategory.money,
   ),
   const Question(
     id: 5,
-    question: "What's the most you've ever spent on a single clothing item? (in €)",
+    question: "Was ist das Meiste, das du je für ein einzelnes Kleidungsstück ausgegeben hast? (in €)",
     category: QuestionCategory.money,
   ),
 
@@ -111,27 +116,22 @@ final List<Question> questions = [
   // -------------------------------------------------------------------------
   const Question(
     id: 6,
-    question: "How many hours do you sleep per night on average?",
+    question: "Wie viele Stunden schläfst du durchschnittlich pro Nacht?",
     category: QuestionCategory.lifestyle,
   ),
   const Question(
     id: 7,
-    question: "How many times per week do you exercise?",
+    question: "Wie oft pro Woche machst du Sport?",
     category: QuestionCategory.lifestyle,
   ),
   const Question(
     id: 8,
-    question: "How many hours of screen time do you have per day?",
-    category: QuestionCategory.lifestyle,
-  ),
-  const Question(
-    id: 9,
-    question: "How many alarms do you set in the morning?",
+    question: "Wie viele Stunden Bildschirmzeit hast du pro Tag?",
     category: QuestionCategory.lifestyle,
   ),
   const Question(
     id: 10,
-    question: "How many minutes does it take you to get ready in the morning?",
+    question: "Wie viele Minuten brauchst du morgens, um dich fertig zu machen?",
     category: QuestionCategory.lifestyle,
   ),
 
@@ -139,28 +139,13 @@ final List<Question> questions = [
   // 🍕 FOOD & DRINKS
   // -------------------------------------------------------------------------
   const Question(
-    id: 11,
-    question: "How many cups of coffee/tea do you drink per day?",
-    category: QuestionCategory.food,
-  ),
-  const Question(
-    id: 12,
-    question: "How many times per week do you eat fast food?",
-    category: QuestionCategory.food,
-  ),
-  const Question(
     id: 13,
-    question: "How many glasses of water do you drink per day?",
-    category: QuestionCategory.food,
-  ),
-  const Question(
-    id: 14,
-    question: "How many times per month do you order food delivery?",
+    question: "Wie viele Gläser Wasser trinkst du pro Tag?",
     category: QuestionCategory.food,
   ),
   const Question(
     id: 15,
-    question: "How many slices of pizza can you eat in one sitting?",
+    question: "Wie viele Stücke Pizza kannst du auf einmal essen?",
     category: QuestionCategory.food,
   ),
 
@@ -169,27 +154,17 @@ final List<Question> questions = [
   // -------------------------------------------------------------------------
   const Question(
     id: 16,
-    question: "How many close friends do you have?",
+    question: "Wie viele enge Freunde hast du?",
     category: QuestionCategory.social,
   ),
   const Question(
     id: 17,
-    question: "How many parties have you been to this year?",
-    category: QuestionCategory.social,
-  ),
-  const Question(
-    id: 18,
-    question: "How many times per week do you text your best friend?",
+    question: "Auf wie vielen Partys warst du dieses Jahr?",
     category: QuestionCategory.social,
   ),
   const Question(
     id: 19,
-    question: "How many people would you invite to your birthday party?",
-    category: QuestionCategory.social,
-  ),
-  const Question(
-    id: 20,
-    question: "How many minutes late do you usually arrive to meetings?",
+    question: "Wie viele Leute würdest du zu deiner Geburtstagsparty einladen?",
     category: QuestionCategory.social,
   ),
 
@@ -198,22 +173,12 @@ final List<Question> questions = [
   // -------------------------------------------------------------------------
   const Question(
     id: 21,
-    question: "How many hours per day do you spend on work/studies?",
+    question: "Wie viele Stunden pro Tag verbringst du mit Arbeit/Studium?",
     category: QuestionCategory.work,
   ),
   const Question(
     id: 22,
-    question: "How many sick days have you taken this year?",
-    category: QuestionCategory.work,
-  ),
-  const Question(
-    id: 23,
-    question: "How many emails do you receive per day on average?",
-    category: QuestionCategory.work,
-  ),
-  const Question(
-    id: 24,
-    question: "How many meetings do you have per week?",
+    question: "Wie viele Krankheitstage hattest du dieses Jahr?",
     category: QuestionCategory.work,
   ),
 
@@ -222,33 +187,185 @@ final List<Question> questions = [
   // -------------------------------------------------------------------------
   const Question(
     id: 25,
-    question: "How many hours per week do you spend playing video games?",
-    category: QuestionCategory.entertainment,
-  ),
-  const Question(
-    id: 26,
-    question: "How many TV series are you currently watching?",
+    question: "Wie viele Stunden pro Woche spielst du Videospiele?",
     category: QuestionCategory.entertainment,
   ),
   const Question(
     id: 27,
-    question: "How many books do you read per year?",
+    question: "Wie viele Bücher liest du pro Jahr?",
     category: QuestionCategory.entertainment,
   ),
   const Question(
     id: 28,
-    question: "How many movies have you watched in the last month?",
+    question: "Wie viele Filme hast du im letzten Monat gesehen?",
     category: QuestionCategory.entertainment,
   ),
   const Question(
     id: 29,
-    question: "How many hours per day do you spend on social media?",
+    question: "Wie viele Stunden pro Tag verbringst du auf Social Media?",
     category: QuestionCategory.entertainment,
   ),
   const Question(
     id: 30,
-    question: "How many songs are in your favorite playlist?",
+    question: "Wie viele Songs sind in deiner Lieblings-Playlist?",
     category: QuestionCategory.entertainment,
+  ),
+
+  // -------------------------------------------------------------------------
+  // ❤️ DATING
+  // -------------------------------------------------------------------------
+  const Question(
+    id: 31,
+    question: "Wie viele Dates hattest du im letzten Jahr?",
+    category: QuestionCategory.dating,
+  ),
+  const Question(
+    id: 32,
+    question: "Wie attraktiv findest du dein letztes Date auf einer Skala von 1–10?",
+    category: QuestionCategory.dating,
+  ),
+  const Question(
+    id: 33,
+    question: "Wie gut bist du im Kommunizieren deiner Gefühle (1–10)?",
+    category: QuestionCategory.dating,
+  ),
+  const Question(
+    id: 34,
+    question: "Wie viele Beziehungen hattest du bisher?",
+    category: QuestionCategory.dating,
+  ),
+  const Question(
+    id: 35,
+    question: "Wie viele Monate dauerte deine längste Beziehung?",
+    category: QuestionCategory.dating,
+  ),
+  const Question(
+    id: 36,
+    question: "Nach wie vielen Dates ist ein Kuss angemessen?",
+    category: QuestionCategory.dating,
+  ),
+  const Question(
+    id: 37,
+    question: "Wie viele Dating-Apps hast du aktuell installiert?",
+    category: QuestionCategory.dating,
+  ),
+  const Question(
+    id: 38,
+    question: "Wie viele Körbe hast du im letzten Jahr verteilt?",
+    category: QuestionCategory.dating,
+  ),
+  const Question(
+    id: 39,
+    question: "Wie viele Jahre Altersunterschied sind in einer Beziehung maximal okay?",
+    category: QuestionCategory.dating,
+  ),
+
+  // -------------------------------------------------------------------------
+  // ✈️ TRAVEL
+  // -------------------------------------------------------------------------
+  const Question(
+    id: 40,
+    question: "In wie vielen Ländern warst du schon?",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 41,
+    question: "Wie viele Tage dauerte dein längster Urlaub am Stück?",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 42,
+    question: "Wie viele Stunden dauerte dein längster Flug?",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 43,
+    question: "Wie viele Sprachen sprichst du (auch nur ein bisschen)?",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 44,
+    question: "Wie viele Kilometer bist du maximal für einen Urlaub gefahren/geflogen?",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 45,
+    question: "Wie viele Hotels hast du in deinem Leben schon besucht?",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 46,
+    question: "Wie viele Koffer nimmst du normalerweise für eine Woche Urlaub mit?",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 47,
+    question: "Wie viel Geld gibst du durchschnittlich pro Tag im Urlaub aus? (in €)",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 48,
+    question: "Wie viele Souvenirs kaufst du durchschnittlich pro Reise?",
+    category: QuestionCategory.travel,
+  ),
+  const Question(
+    id: 49,
+    question: "Wie viele Monate im Voraus planst du deinen Urlaub meistens?",
+    category: QuestionCategory.travel,
+  ),
+
+  // -------------------------------------------------------------------------
+  // 📱 TECHNOLOGY
+  // -------------------------------------------------------------------------
+  const Question(
+    id: 50,
+    question: "Wie viele Fotos hast du aktuell auf deinem Handy?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 51,
+    question: "Wie viele Apps hast du installiert?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 52,
+    question: "Wie viele ungelesene E-Mails hast du gerade?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 53,
+    question: "Wie viel Prozent Akku hast du gerade noch?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 54,
+    question: "Wie viele Jahre alt ist dein aktuelles Handy?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 55,
+    question: "Wie viele verschiedene Handynummern hattest du schon?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 56,
+    question: "Wie viele Stunden verbringst du täglich am Laptop/PC?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 57,
+    question: "Wie viele Abos (Netflix, Spotify, etc.) bezahlst du aktuell?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 58,
+    question: "Wie viele Tabs hast du gerade in deinem Browser offen?",
+    category: QuestionCategory.technology,
+  ),
+  const Question(
+    id: 59,
+    question: "Wie viele Ladegeräte besitzt du insgesamt?",
+    category: QuestionCategory.technology,
   ),
 ];
 
@@ -269,11 +386,30 @@ Question getRandomQuestion() {
 
 /// Get two different random questions (one for normal players, one for liar)
 /// Returns a map with 'normal' and 'liar' questions
+/// Both questions will be from the SAME category to make it fair but challenging
 Map<String, Question> getQuestionPair() {
-  final shuffled = List<Question>.from(questions)..shuffle();
+  // 1. Pick a random category
+  final categories = QuestionCategory.values;
+  final randomCategory = categories[Random().nextInt(categories.length)];
+  
+  // 2. Get all questions from that category
+  final categoryQuestions = getQuestionsByCategory(randomCategory);
+  
+  // Safety check: if category has less than 2 questions, fallback to random
+  if (categoryQuestions.length < 2) {
+    final shuffled = List<Question>.from(questions)..shuffle();
+    return {
+      'normal': shuffled[0],
+      'liar': shuffled[1],
+    };
+  }
+
+  // 3. Shuffle and pick two different questions from that category
+  categoryQuestions.shuffle();
+  
   return {
-    'normal': shuffled[0],
-    'liar': shuffled[1],
+    'normal': categoryQuestions[0],
+    'liar': categoryQuestions[1],
   };
 }
 

@@ -32,6 +32,22 @@ class GameScreen extends StatelessWidget {
           );
         }
 
+        // Wenn wir wieder in der Lobby sind (z.B. nach "Nochmal spielen"), zurück zum LobbyScreen
+        if (room.state == GameState.lobby) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LobbyScreen()),
+            );
+          });
+          return Scaffold(
+            body: Container(
+              decoration: const BoxDecoration(gradient: AppTheme.backgroundGradient),
+              child: const Center(child: CircularProgressIndicator(color: AppTheme.primaryPurple)),
+            ),
+          );
+        }
+
         return PopScope(
           canPop: false,
           onPopInvokedWithResult: (didPop, result) async {
@@ -163,7 +179,6 @@ class _QuestioningPhase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final question = gameService.myQuestion;
-    final isLiar = gameService.isLiar;
     final isHost = gameService.isHost;
 
     return Padding(
@@ -178,36 +193,6 @@ class _QuestioningPhase extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          if (isLiar)
-            FadeSlideTransition(
-              delay: const Duration(milliseconds: 200),
-              child: PulsingWidget(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  decoration: BoxDecoration(
-                    gradient: AppTheme.liarGradient,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppTheme.accentRed.withOpacity(0.4),
-                        blurRadius: 15,
-                      ),
-                    ],
-                  ),
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.warning_amber, color: Colors.white, size: 22),
-                      SizedBox(width: 10),
-                      Text(
-                        'Du bist der LÜGNER! Pass dich an!',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
           const SizedBox(height: 24),
           FadeSlideTransition(
             delay: const Duration(milliseconds: 300),
