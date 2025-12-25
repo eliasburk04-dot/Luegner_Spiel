@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 import 'services/game_service.dart';
+import 'services/sound_service.dart';
 import 'screens/home_screen.dart';
 import 'utils/theme.dart';
 
@@ -20,8 +21,11 @@ class LuegnerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GameService(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => GameService()),
+        Provider(create: (context) => SoundService(), dispose: (_, service) => service.dispose()),
+      ],
       child: MaterialApp(
         title: 'Lügner - The Liar Game',
         debugShowCheckedModeBanner: false,

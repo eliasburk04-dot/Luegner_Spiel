@@ -17,6 +17,9 @@ A multiplayer social deception game built with Flutter and Firebase. One player 
 ## ✨ Features
 
 - **Real-time Multiplayer**: 3-10 players can join and play together
+- **Two Game Modes**:
+  - **Lügner**: Find the imposter who has a different question!
+  - **Stirnraten**: The classic "Heads Up" style game with tilt controls (Anime, Star Wars, & Custom categories).
 - **Room Codes & QR Codes**: Easy room joining with 6-character codes or QR scanning
 - **30+ Pre-made Questions**: Categories include money, lifestyle, food, social, work, and entertainment
 - **Easy to Add Questions**: Simple question format in a dedicated file

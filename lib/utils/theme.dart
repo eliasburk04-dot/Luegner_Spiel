@@ -14,6 +14,10 @@ class AppTheme {
   static const Color cardDark = Color(0xFF252542);
   static const Color cardLight = Color(0xFF2D2D4A);
   
+  static const Color textLight = Colors.white;
+  static const Color textDim = Colors.white70;
+  static const Color primaryBlue = Color(0xFF3B82F6);
+  
   static const LinearGradient primaryGradient = LinearGradient(
     colors: [primaryPurple, primaryPink],
     begin: Alignment.topLeft,

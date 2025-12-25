@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../services/game_service.dart';
@@ -239,6 +240,10 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
               textCapitalization: TextCapitalization.characters,
               textAlign: TextAlign.center,
               maxLength: 6,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]')),
+                UpperCaseTextFormatter(),
+              ],
               style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -297,3 +302,15 @@ class _JoinRoomScreenState extends State<JoinRoomScreen> {
     );
   }
 }
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(
+      text: newValue.text.toUpperCase(),
+      selection: newValue.selection,
+    );
+  }
+}
+
